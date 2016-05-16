@@ -503,11 +503,17 @@ module.exports = function(S) {
                 Dimensions: [
                     { Name: "Resource", Value: resourceName },
                     { Name: "FunctionName", Value: functionName }
-                ],
-                InsufficientDataActions: [notificationAction],
-                OKActions: [notificationAction],
-                AlarmActions: [notificationAction]
+                ]
             };
+
+            if (alertConfig.insufficientData !== false)
+              config.InsufficientDataActions = [notificationAction];
+
+            if (alertConfig.ok !== false)
+              config.OKActions = [notificationAction];
+
+            if (alertConfig.alarm !== false)
+              config.AlarmActions = [notificationAction];
 
             return config;
         }
